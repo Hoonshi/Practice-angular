@@ -1,13 +1,52 @@
-<form [formGroup]="signupForm" (submit)="onSubmit()">
-  <input
-    type="email"
-    formControlName="email"
-    placeholder="이메일을 입력하세요"
-  />
-  <input
-    type="password"
-    formControlName="password"
-    placeholder="비밀번호를 입력하세요"
-  />
-  <button type="submit" [disabled]="signupForm.invalid">회원가입</button>
-</form>
+<div class="min-h-screen flex items-center justify-center bg-white">
+  <div class="w-full max-w-sm">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-black mb-4">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+        </svg>
+      </div>
+      <h1 class="text-2xl font-bold text-black">Todo</h1>
+      <p class="text-sm text-gray-500 mt-1">새 계정을 만들어 시작하세요</p>
+    </div>
+
+    <div class="bg-white rounded-2xl border border-gray-200 p-8">
+      <form [formGroup]="signupForm" (submit)="onSubmit()" class="space-y-5">
+        <div>
+          <label class="block text-sm font-medium text-black mb-1.5">이메일</label>
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="example@email.com"
+            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-black placeholder-gray-400 text-sm
+                   focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-black mb-1.5">비밀번호</label>
+          <input
+            type="password"
+            formControlName="password"
+            placeholder="8자 이상 입력하세요"
+            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-black placeholder-gray-400 text-sm
+                   focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition"
+          />
+        </div>
+        <button
+          type="submit"
+          [disabled]="signupForm.invalid"
+          class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-sm font-semibold
+                 hover:bg-gray-800 disabled:opacity-30 disabled:cursor-not-allowed transition"
+        >
+          회원가입
+        </button>
+      </form>
+    </div>
+
+    <p class="text-center text-sm text-gray-500 mt-5">
+      이미 계정이 있으신가요?
+      <a routerLink="/login" class="text-black font-medium hover:underline">로그인</a>
+    </p>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { TodoRoutingModule } from './todo-routing.module';
 import { TodoListComponent } from './todo-list/todo-list.component';
@@ -8,6 +9,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [TodoListComponent, TodoDetailComponent],
-  imports: [CommonModule, TodoRoutingModule, ReactiveFormsModule],
+  imports: [CommonModule, TodoRoutingModule, ReactiveFormsModule, RouterModule],
 })
 export class TodoModule {}

@@ -1,14 +1,78 @@
-<div>
-  <!-- 추가 버튼 -->
-  <button (click)="onAdd()">Todo 추가</button>
+<div class="min-h-screen bg-white">
+  <div class="max-w-xl mx-auto px-4 py-10">
 
-  <!-- 목록 -->
-  <ul>
-    <li *ngFor="let todo of todos">
-      {{ todo.title }}
-      <button (click)="onToggle(todo.id)">완료</button>
-      <button (click)="onDelete(todo.id)">삭제</button>
-      <a [routerLink]="['/todo', todo.id]">상세보기</a>
-    </li>
-  </ul>
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 class="text-2xl font-bold text-black">내 할 일</h1>
+        <p class="text-sm text-gray-500 mt-0.5">{{ (todos$ | async)?.length }}개의 항목</p>
+      </div>
+      <button
+        (click)="onAdd()"
+        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-black text-white text-sm font-semibold
+               hover:bg-gray-800 transition"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        추가
+      </button>
+    </div>
+
+    <div *ngIf="(todos$ | async)?.length === 0" class="text-center py-16">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gray-100 mb-4">
+        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
+      </div>
+      <p class="text-gray-400 text-sm">할 일이 없습니다. 추가해 보세요!</p>
+    </div>
+
+    <ul class="space-y-3">
+      <li
+        *ngFor="let todo of todos$ | async"
+        class="bg-white rounded-2xl border border-gray-200 px-5 py-4 flex items-center gap-4 hover:border-gray-300 transition"
+      >
+        <button
+          (click)="onToggle(todo.id)"
+          [class]="todo.isCompleted
+            ? 'w-6 h-6 rounded-full bg-black flex items-center justify-center flex-shrink-0 transition'
+            : 'w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center flex-shrink-0 hover:border-black transition'"
+        >
+          <svg *ngIf="todo.isCompleted" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+          </svg>
+        </button>
+
+        <span
+          [class]="todo.isCompleted
+            ? 'flex-1 text-sm text-gray-400 line-through'
+            : 'flex-1 text-sm text-black font-medium'"
+        >{{ todo.title }}</span>
+
+        <span class="text-xs px-2 py-0.5 rounded-full border border-gray-200 text-gray-500">
+          {{ todo.priority === 'urgent' ? '긴급' : todo.priority === 'normal' ? '보통' : '낮음' }}
+        </span>
+
+        <a
+          [routerLink]="['/todo', todo.id]"
+          class="p-1.5 rounded-lg text-gray-400 hover:text-black hover:bg-gray-100 transition"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+        <button
+          (click)="onDelete(todo.id)"
+          class="p-1.5 rounded-lg text-gray-400 hover:text-black hover:bg-gray-100 transition"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          </svg>
+        </button>
+      </li>
+    </ul>
+
+  </div>
 </div>
