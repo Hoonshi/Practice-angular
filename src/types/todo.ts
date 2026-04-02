@@ -8,3 +8,11 @@ export interface Todo {
   isCompleted: boolean;
   completedAt: string | null;
 }
+
+export type TodoResponse = {
+  data: Todo[];
+};
+
+export type TodoDetailResponse = {
+  data: Todo;
+};
