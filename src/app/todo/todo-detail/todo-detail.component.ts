@@ -25,11 +25,12 @@ export class TodoDetailComponent {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-
-    this.todoService
-      .getTodoById(id!)
-      .subscribe((res) => (this.todo = res.data));
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
+      this.todoService.getTodoById(id!).subscribe((res) => {
+        this.todo = res.data;
+      });
+    });
   }
 
   onEdit(): void {
