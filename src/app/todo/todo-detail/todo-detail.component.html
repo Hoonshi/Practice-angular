@@ -3,12 +3,9 @@
 
     <a
       routerLink="/todo"
-      class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-black mb-6 transition"
+      class="inline-flex items-center text-sm text-gray-500 hover:text-black mb-6 transition"
     >
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
-      목록으로
+      ← 목록으로
     </a>
 
     <!-- View mode -->
@@ -41,13 +38,8 @@
 
       <button
         (click)="onEdit()"
-        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-black text-white text-sm font-semibold
-               hover:bg-gray-800 transition"
+        class="px-5 py-2.5 rounded-xl bg-black text-white text-sm font-semibold hover:bg-gray-800 transition"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-        </svg>
         수정
       </button>
     </div>

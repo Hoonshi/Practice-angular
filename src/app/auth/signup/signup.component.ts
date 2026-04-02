@@ -25,6 +25,12 @@ export class SignupComponent {
     private router: Router,
   ) {}
 
+  ngOnInit(): void {
+    if (this.authService.getToken()) {
+      this.router.navigate(['/todo']);
+    }
+  }
+
   onSubmit(): void {
     const { email, password } = this.signupForm.value;
 

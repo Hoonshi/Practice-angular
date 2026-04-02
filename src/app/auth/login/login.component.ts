@@ -24,6 +24,12 @@ export class LoginComponent {
     private authService: AuthService,
   ) {}
 
+  ngOnInit(): void {
+    if (this.authService.getToken()) {
+      this.route.navigate(['/todo']);
+    }
+  }
+
   onSubmit(): void {
     const { email, password } = this.loginForm.value;
 
