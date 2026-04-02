@@ -1,1 +1,25 @@
-<p>todo-detail works!</p>
+<div>
+  <h2>Todo 상세보기</h2>
+
+  <div *ngIf="todo && !isEditMode">
+    <h3>{{ todo.title }}</h3>
+    <p>{{ todo.content }}</p>
+    <p>우선순위: {{ todo.priority }}</p>
+    <p>완료 여부: {{ todo.isCompleted ? "완료" : "미완료" }}</p>
+    <p>완료 날짜: {{ todo.completedAt || "없음" }}</p>
+    <button (click)="onEdit()">수정</button>
+  </div>
+
+  <!-- 수정 -->
+  <form *ngIf="isEditMode" [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+    <input formControlName="title" placeholder="제목" />
+    <input formControlName="content" placeholder="내용" />
+    <select formControlName="priority">
+      <option value="urgent">긴급</option>
+      <option value="normal">보통</option>
+      <option value="low">낮음</option>
+    </select>
+    <button type="submit" [disabled]="todoForm.invalid">저장</button>
+    <button type="button" (click)="onCancel()">취소</button>
+  </form>
+</div>
