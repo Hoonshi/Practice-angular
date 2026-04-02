@@ -1,1 +1,13 @@
-<p>signup works!</p>
+<form [formGroup]="signupForm" (submit)="onSubmit()">
+  <input
+    type="email"
+    formControlName="email"
+    placeholder="이메일을 입력하세요"
+  />
+  <input
+    type="password"
+    formControlName="password"
+    placeholder="비밀번호를 입력하세요"
+  />
+  <button type="submit" [disabled]="signupForm.invalid">회원가입</button>
+</form>

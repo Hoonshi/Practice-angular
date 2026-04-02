@@ -1,1 +1,9 @@
-<p>login works!</p>
+<form [formGroup]="loginForm" (submit)="onSubmit()">
+  <input
+    type="email"
+    placeholder="이메일을 입력하세요"
+    formControlName="email"
+  />
+  <input type="password" placeholder="Password" formControlName="password" />
+  <button type="submit" [disabled]="loginForm.invalid">로그인</button>
+</form>
