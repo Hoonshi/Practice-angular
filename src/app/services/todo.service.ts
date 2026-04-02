@@ -10,7 +10,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class TodoService {
-  private baseUrl = 'http://localhost:8000';
+  private baseUrl = 'http://localhost:8080';
   private todoSubject = new BehaviorSubject<Todo[]>([]);
   //behaviorSubject를 private로 선언하여 외부에서 직접 접근하지 못하도록 하고, 대신 todo$라는 public Observable을 통해 구독할 수 있도록 한다.
   todo$ = this.todoSubject.asObservable();
