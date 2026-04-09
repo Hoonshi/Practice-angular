@@ -33,14 +33,14 @@ export class LoginComponent {
   onSubmit(): void {
     const { email, password } = this.loginForm.value;
 
-    this.authService.login(email!, password!).subscribe(
-      (response) => {
+    this.authService.login(email!, password!).subscribe({
+      next: (response) => {
         this.authService.saveToken(response.token);
         this.route.navigate(['/todo']);
       },
-      (error) => {
+      error: (error) => {
         console.error('Login failed:', error);
       },
-    );
+    });
   }
 }

@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  //post 요청의 경우 Observable를 반환하기에 Observable<AuthResponse>로 반환 타입을 지정해준다.
+  //HttpClient를 통한 모든 http 요청은 Obeservable을 반환한다.
   login(email: string, password: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.baseUrl}/users/login`, {
       email,

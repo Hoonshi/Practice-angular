@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
+//implements HttpInterceptor는 인터셉터로서의 역할을 수행하기 위해 필요한 인터페이스를 구현한다는 의미입니다.
+//만약 인터셉터가 HttpInterceptor 인터페이스를 구현하지 않으면 ts에러 발생
 export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private router: Router,
@@ -17,12 +19,24 @@ export class AuthInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    return next.handle(req).pipe(
+    const token = this.authService.getToken();
+    const cloned = req.clone({
+      headers: req.headers.set('Authorization', `Bearer ${token}`),
+    });
+    return next.handle(cloned).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 401) {
-          this.authService.removeToken();
-          alert('인증이 만료되었습니다. 다시 로그인해주세요.');
-          this.router.navigate(['/login']);
+        switch (error.status) {
+          case 401:
+            this.authService.removeToken();
+            //임시로 alert로 토큰 에러 알림
+            alert('토큰 에러.');
+            this.router.navigate(['/login']);
+            break;
+          case 403:
+            this.router.navigate(['/forbidden']);
+            break;
+          case 500:
+            break;
         }
         return throwError(() => error);
       }),

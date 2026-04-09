@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TodoService } from '../../services/todo.service';
 import { Todo } from '../../../types/todo';
 import { FormControl, FormGroup } from '@angular/forms';
+import { take, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-todo-detail',
@@ -24,6 +25,7 @@ export class TodoDetailComponent {
     private todoService: TodoService,
   ) {}
 
+  //ActivatedRoute의 경우 구독해제 직접 안해도 괜찮음.
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');

@@ -1,45 +1,59 @@
-<div class="min-h-screen flex items-center justify-center bg-white">
+<div class="flex items-center justify-center min-h-screen bg-white">
   <div class="w-full max-w-sm">
-    <div class="text-center mb-8">
+    <div class="mb-8 text-center">
       <h1 class="text-2xl font-bold text-black">Angular Todo App</h1>
     </div>
 
-    <div class="bg-white rounded-2xl border border-gray-200 p-8">
+    <div class="p-8 bg-white border border-gray-200 rounded-2xl">
       <form [formGroup]="loginForm" (submit)="onSubmit()" class="space-y-5">
         <div>
-          <label class="block text-sm font-medium text-black mb-1.5">이메일</label>
+          <label class="block text-sm font-medium text-black mb-1.5"
+            >이메일</label
+          >
           <input
             type="email"
             placeholder="example@email.com"
             formControlName="email"
-            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-black placeholder-gray-400 text-sm
-                   focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition"
+            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-black placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition"
           />
         </div>
         <div>
-          <label class="block text-sm font-medium text-black mb-1.5">비밀번호</label>
+          <label class="block text-sm font-medium text-black mb-1.5"
+            >비밀번호</label
+          >
           <input
             type="password"
             placeholder="••••••••"
             formControlName="password"
-            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-black placeholder-gray-400 text-sm
-                   focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition"
+            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-black placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition"
           />
+          <div
+            *ngIf="
+              loginForm.get('password')?.touched &&
+              loginForm.get('password')?.invalid
+            "
+          >
+            비밀번호는 8자 이상입니다
+          </div>
+          <div>
+            FormGroup value property: {{ loginForm.get("password")?.value }}
+          </div>
         </div>
         <button
           type="submit"
           [disabled]="loginForm.invalid"
-          class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-sm font-semibold
-                 hover:bg-gray-800 disabled:opacity-30 disabled:cursor-not-allowed transition"
+          class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-sm font-semibold hover:bg-gray-800 disabled:opacity-30 disabled:cursor-not-allowed transition"
         >
           로그인
         </button>
       </form>
     </div>
 
-    <p class="text-center text-sm text-gray-500 mt-5">
+    <p class="mt-5 text-sm text-center text-gray-500">
       계정이 없으신가요?
-      <a routerLink="/signup" class="text-black font-medium hover:underline">회원가입</a>
+      <a routerLink="/signup" class="font-medium text-black hover:underline"
+        >회원가입</a
+      >
     </p>
   </div>
 </div>

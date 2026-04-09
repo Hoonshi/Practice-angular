@@ -22,7 +22,7 @@
 
     <ul class="space-y-3">
       <li
-        *ngFor="let todo of todos$ | async"
+        *ngFor="let todo of todos$ | async; trackBy: trackById"
         class="bg-white rounded-2xl border border-gray-200 px-5 py-4 flex items-center gap-4 hover:border-gray-300 transition"
       >
         <button
